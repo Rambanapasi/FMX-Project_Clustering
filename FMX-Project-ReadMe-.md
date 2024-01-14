@@ -179,6 +179,24 @@ for (cluster_num in unique(Cap$cluster)) {
     ##  Changed your data.frame object to tbl_df(). 
     ##  If results are strange, use a tbl_df class and check column definitions (character, numeric, etc make sense before using tbl_xts.)
 
+    ## Warning in tbl2xts::tbl_xts(., cols_to_xts = rtn, spread_by = stock): NOTE:......... 
+    ##  Changed your data.frame object to tbl_df(). 
+    ##  If results are strange, use a tbl_df class and check column definitions (character, numeric, etc make sense before using tbl_xts.)
+
+    ## Warning in tbl2xts::tbl_xts(., cols_to_xts = rtn, spread_by = stock): NOTE:......... 
+    ##  Changed your data.frame object to tbl_df(). 
+    ##  If results are strange, use a tbl_df class and check column definitions (character, numeric, etc make sense before using tbl_xts.)
+
+    ## The spread_by column only has one category. 
+    ## Hence only the column name was changed...
+
+    ## Warning in tbl2xts::tbl_xts(., cols_to_xts = rtn, spread_by = stock): NOTE:......... 
+    ##  Changed your data.frame object to tbl_df(). 
+    ##  If results are strange, use a tbl_df class and check column definitions (character, numeric, etc make sense before using tbl_xts.)
+
+    ## The spread_by column only has one category. 
+    ## Hence only the column name was changed...
+
 ``` r
 Portfolio <- Cluster_Port %>% reduce(inner_join, "date") %>% gather(Cluster, return, -date)
 
@@ -296,26 +314,29 @@ library(PerformanceAnalytics)
   Moms
   }
   
-Moments_Comp(Ports, BMxts, 6)
+Moments_Comp(Ports, BMxts, 10)
 ```
 
-    ## # A tibble: 14 × 5
-    ##    Period        Info                  `Portfolio 1` `Portfolio 2` `Portfolio 3`
-    ##    <glue>        <chr>                         <dbl>         <dbl>         <dbl>
-    ##  1 Last 6 Months Cum Returns                  -1.03          1.42          1.01 
-    ##  2 Last 6 Months Returns (Ann.)              NaN             0.093         0.073
-    ##  3 Last 6 Months Returns Excess (Ann.)       NaN             0.095         0.074
-    ##  4 Last 6 Months SD (Ann.)                     0.746         0.204         0.369
-    ##  5 Last 6 Months Adj. Sharpe Ratio           NaN             0.413         0.207
-    ##  6 Last 6 Months Pain Index                    3.64          0.066         0.117
-    ##  7 Last 6 Months Avg DD                        1.34          0.091         0.147
-    ##  8 Last 6 Months Tracking Error                0.749         0.202         0.366
-    ##  9 Last 6 Months Information Ratio           NaN             0.491         0.215
-    ## 10 Last 6 Months Beta                         -0.518         0.189         0.495
-    ## 11 Last 6 Months Beta Bull                    -5.75         -2.24         -2.89 
-    ## 12 Last 6 Months Beta Bear                    -0.613         1.68          3.23 
-    ## 13 Last 6 Months Up-Down Ratio                 0.491         0.585         0.509
-    ## 14 Last 6 Months Modified CVaR                -0.408        -0.186        -0.202
+    ## ES calculation produces unreliable result (inverse risk) for column: 6 : -0.698735133477299
+
+    ## # A tibble: 14 × 8
+    ##    Period         Info   `Portfolio 1` `Portfolio 2` `Portfolio 3` `Portfolio 4`
+    ##    <glue>         <chr>          <dbl>         <dbl>         <dbl>         <dbl>
+    ##  1 Last 10 Months Cum R…         2.90          4.27          1.09         -1    
+    ##  2 Last 10 Months Retur…         0.147         0.182         0.077       NaN    
+    ##  3 Last 10 Months Retur…         0.149         0.184         0.079       NaN    
+    ##  4 Last 10 Months SD (A…         0.239         0.34          0.244         1.20 
+    ##  5 Last 10 Months Adj. …         0.604         0.581         0.318       NaN    
+    ##  6 Last 10 Months Pain …         0.054         0.122         0.077         6.5  
+    ##  7 Last 10 Months Avg DD         0.086         0.156         0.121         1.22 
+    ##  8 Last 10 Months Track…         0.236         0.338         0.242         1.20 
+    ##  9 Last 10 Months Infor…         0.648         0.557         0.344       NaN    
+    ## 10 Last 10 Months Beta           0.645         1.06          0.761        -1.39 
+    ## 11 Last 10 Months Beta …        -0.939        -0.461        -1.06         -9.06 
+    ## 12 Last 10 Months Beta …         1.64          2.74          2.04         -2.68 
+    ## 13 Last 10 Months Up-Do…         0.679         0.566         0.585         0.491
+    ## 14 Last 10 Months Modif…        -0.117        -0.151        -0.134        -0.65 
+    ## # ℹ 2 more variables: `Portfolio 5` <dbl>, `Portfolio 6` <dbl>
 
 # What I aim to improve
 

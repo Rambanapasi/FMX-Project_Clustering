@@ -184,17 +184,19 @@ try <- Rolling_data %>%
  try
 
 # visualize the silhoutte, this gives the highest value where the observations are not overlapping into other clusters
-fviz_nbclust(try, kmeans, method = "silhouette")+
+a <- fviz_nbclust(try, kmeans, method = "silhouette")+
 theme_classic()
 
+a
+
 # take the optimum amount of clusters
-km.res <- kmeans(try, 3, nstart = 1000)
+km.res <- kmeans(try, 6, nstart = 1000)
 
 # Define a palette with 7 colours
 custom_palette <- c("#2E9FDF", "#00AFBB", "#E7B800", "#FC4E07", "#FF5733", "#9A55FF", "#4CAF50", "#FFC300", "#D9534F")
 
 # visualize the clusters
-fviz_cluster(
+b <- fviz_cluster(
   km.res, 
   data = try,
   palette = custom_palette,
@@ -205,6 +207,7 @@ fviz_cluster(
   main = ""
 )
 
+b
 # create a dataset to merge with the original dataset
 
 cluster.merging <- cbind(names, cluster = km.res$cluster) %>% merge(., clusteringdata, "stock")
@@ -362,7 +365,7 @@ library(PerformanceAnalytics)
   Moms
   }
   
-Moments_Comp(Ports, BMxts, 6)
+Moments_Comp(Ports, BMxts, 10)
 
 ```
 # What I aim to improve
